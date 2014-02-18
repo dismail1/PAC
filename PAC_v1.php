@@ -11,11 +11,27 @@
 
 <body>
 	<div id="left">
+    <script type="text/javascript">
+      // Get patient ID, type and in lab/at home
+      var patientID = "";
+      var patientType = "";
+      var inLabAtHome = "";
+      $.getJSON('PatientInfo.json', function(data) {
+        $.each(data.patientInfo, function(f, i) {
+          patientID = f.PatientID;
+          patientType = f.PatientType;
+          inLabAtHome = f.InLabAtHome;
+        });
+      });
+      $(patientID).appendTo("#patientID");
+      $(patientType).appendTo("#patientType");
+      $(inLabAtHome).appendTo("#inLabAtHome");
+    </script>
+
 		<p id="LoyolaPACLab">Loyola PAC Lab<br>
-		<span id="patient">Patient ID:</span><br>
-		<span id="patient">Patient type:</span><br>
-		<span id="patient">In lab/at home:</span><br>
-		<span id="patient">Start time:</span></p>
+		<span id="patient">Patient ID: </span><span id="patientID"></span><br>
+		<span id="patient">Patient type: </span><span id="patientType"><br>
+		<span id="patient">In lab/at home: </span><span id="inLabAtHome"></p>
 
 		<p>Comments:
 		<textarea rows="10" cols="45"></textarea></p>
@@ -29,7 +45,7 @@
 	</div>
 
 	<div id="right">
-		<p><img src="luc-logo.png" alt="Loyola logo" align="right"></p><br><br><br><br><br><br><br><br>
+		<p><img src="luc-logo.png" alt="Loyola logo" align="right"></p><br><br><br><br><br><br><br>
 
     <div id="placeholder"></div>
 
