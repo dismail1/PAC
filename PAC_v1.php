@@ -75,7 +75,7 @@
         var d2 = [];
         var d3 = [];
 
-        for (var t = 0; t <= 10; t ++) {
+        for (var t = 0; t <= 16400; t ++) {
           d1.push([timeInSeconds[t],x[t]]);
           d2.push([timeInSeconds[t],y[t]]);
           d3.push([timeInSeconds[t],z[t]]);
@@ -106,7 +106,8 @@
           }
         };
   
-        var plot = $.plot(placeholder,xData, options);
+//        var plot = $.plot(placeholder, xData, options);
+        var plot = $.plot(placeholder, [d1, d2, d3], options);
         placeholder.bind('plotpan', function (event, plot) {
           var axes = plot.getAxes();
           $(".message").html("Panning to x: "  + axes.xaxis.min.toFixed(2)

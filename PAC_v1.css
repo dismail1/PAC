@@ -48,3 +48,32 @@ body
     font-size: 18px;
     font-weight: 400;
 }
+
+/**********************************
+    Graph
+***********************************/
+#placeholder
+{
+     width: 900px;
+     height: 300px;
+}
+
+#placeholder .button
+{
+    position: absolute;
+    cursor: pointer;
+}
+
+#placeholder div.button
+{
+    font-size: smaller;
+    color: #999;
+    background-color: #eee;
+    padding: 2px;
+}
+
+.message
+{
+    padding-left: 50px;
+    font-size: smaller;
+}
