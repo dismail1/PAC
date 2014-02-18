@@ -1,0 +1,9 @@
+{
+	"patientInfo": [
+		{
+			"PatientID":"123456",
+			"PatientType":"Parkinson's",
+			"InLabAtHome":"In lab"
+		}
+	]
+}
