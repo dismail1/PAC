@@ -13,25 +13,19 @@
 	<div id="left">
     <script type="text/javascript">
       // Get patient ID, type and in lab/at home
+
+$(function () {
       var patientID = "";
       var patientType = "";
       var inLabAtHome = "";
       $.getJSON('PatientInfo.json', function(data) {
-        $.each(data.patientInfo, function(f, i) {
-          patientID = f.PatientID;
-          patientType = f.PatientType;
-          inLabAtHome = f.InLabAtHome;
-        });
-      });
-      $(patientID).appendTo("#patientID");
-      $(patientType).appendTo("#patientType");
-      $(inLabAtHome).appendTo("#inLabAtHome");
+          document.getElementById("patient").innerHTML="Patient ID: "+data.PatientID+'<br>'+"Patient type: "+data.PatientType+'<br>'+"In lab/at home: "+data.InLabAtHome;
+          });
+    });
     </script>
 
 		<p id="LoyolaPACLab">Loyola PAC Lab<br>
-		<span id="patient">Patient ID: </span><span id="patientID"></span><br>
-		<span id="patient">Patient type: </span><span id="patientType"><br>
-		<span id="patient">In lab/at home: </span><span id="inLabAtHome"></p>
+		<div id="patient"></div><br></p>
 
 		<p>Comments:
 		<textarea rows="10" cols="45"></textarea></p>
