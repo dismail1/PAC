@@ -49,8 +49,14 @@ body
     font-weight: 400;
 }
 
+#display1
+{
+    font-size: 18px;
+    font-weight: 400;
+}
+
 /**********************************
-    Graph
+    Graphs
 ***********************************/
 #placeholder
 {
@@ -65,6 +71,26 @@ body
 }
 
 #placeholder div.button
+{
+    font-size: smaller;
+    color: #999;
+    background-color: #eee;
+    padding: 2px;
+}
+
+#placeholder2
+{
+     width: 900px;
+     height: 300px;
+}
+
+#placeholder2 .button
+{
+    position: absolute;
+    cursor: pointer;
+}
+
+#placeholder2 div.button
 {
     font-size: smaller;
     color: #999;
