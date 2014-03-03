@@ -29,12 +29,7 @@
   </div>
 
   <div id="right">
-      <script type="text/javascript">
-        // **************************************************
-        // ******* FIGURE OUT HOW TO AUTOMATE THIS!!! *******
-        var amtData = 20000;
-        // **************************************************
-
+    <script type="text/javascript">
         // Data from JSON file is stored in an array
         var timeInSeconds = new Array();
         var x = new Array();
@@ -42,19 +37,19 @@
         var z = new Array();
         var timeInSeconds = new Array();
         var activity = new Array();
-        var i = 0;
+        var amtData = 0;
 
         $.getJSON('SampleData.json', function(data) {
       
           // Read data from SampleData.json
           $.each(data.patientData, function(i, f) {
-            timeInSeconds[i] = f.TimeInSeconds;
-            x[i] = f.X;
-            y[i] = f.Y;
-            z[i] = f.Z;
-            timeInSeconds[i] = f.TimeInSeconds;
-            activity[i] = f.Activity;
-            i++;
+            timeInSeconds[amtData] = f.TimeInSeconds;
+            x[amtData] = f.X;
+            y[amtData] = f.Y;
+            z[amtData] = f.Z;
+            timeInSeconds[amtData] = f.TimeInSeconds;
+            activity[amtData] = f.Activity;
+            amtData++;
           });
           
           $(function () {
@@ -114,7 +109,7 @@
                 zoomRange: [0.1, 1000000], panRange: [-1000000, 1000000]
               },
               yaxis: {
-                zoomRange: [0.1, 1000000], panRange: [-1000000, 1000000]
+                zoomRange: [0.1, 0.1], panRange: [-1000000, 1000000]
               },
               zoom: {interactive: true},
               pan: {interactive: true},
@@ -138,7 +133,7 @@
                 zoomRange: [0.1, 1000000], panRange: [-1000000, 1000000]
               },
               yaxis: {
-                zoomRange: [0.1, 1000000], panRange: [-1000000, 1000000]
+                zoomRange: [0.1, 0.1], panRange: [-1000000, 1000000]
               },
               zoom: {interactive: true},
               pan: {interactive: true},
