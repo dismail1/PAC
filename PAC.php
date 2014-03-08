@@ -171,24 +171,6 @@
 
         Activity Type
         <div id="placeholder2" class="flot"></div>
-
-        <table>
-            <tr>
-                <td id="cell"></td>
-                <td id="colorBox" bgcolor="#FFD700"></td>
-                <td id="cell">&nbsp;Lying</td>
-                <td id="colorBox" bgcolor="#228B22"></td>
-                <td id="cell">&nbsp;Sitting</td>
-                <td id="colorBox" bgcolor="#B8860B"></td>
-                <td id="cell">&nbsp;Standing</td>
-                <td id="colorBox" bgcolor="#87CEEB"></td>
-                <td id="cell">&nbsp;Wheeling</td>
-                <td id="colorBox" bgcolor="#DC143C"></td>
-                <td id="cell">&nbsp;Standing</td>
-                <td id="colorBox" bgcolor="#A9A9A9"></td>
-                <td id="cell">&nbsp;Misc.</td>
-            </tr>
-        </table>
     </div>
 
 </body>
