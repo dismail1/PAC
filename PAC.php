@@ -4,8 +4,10 @@
     <link rel="stylesheet" href="PAC.css">
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"> </script>
     <script language="javascript" type="text/javascript" src="jquery.js"></script>
-    <script language="javascript" type="text/javascript" src="jquery.flot1.js"></script>
+    <script language="javascript" type="text/javascript" src="jquery.flot.js"></script>
     <script language="javascript" type="text/javascript" src="jquery.flot.navigate.js"></script>
+    <script language="javascript" type="text/javascript" src="jquery.flot.selection.js"></script>
+
 
     <script type="text/javascript">
         $(function () {
@@ -82,8 +84,9 @@
                 lines: {show: true},
                 shadowSize: 0
               },
-              xaxis: { zoomRange: [0.1, 1000000], panRange: [-1000000, 1000000] },
+              xaxis: { zoomRange: [0.1, 1000000], panRange: [-1000000, 1000000]},
               yaxis: { zoomRange: [0.1, 0.1], panRange: [-1000000, 1000000] },
+              selection: { mode: "x"},
               zoom: { interactive: true },
               pan: { interactive: true },
               grid: {
@@ -113,6 +116,7 @@
                 colors: ["#FFD700", "#87CEEB", "#DC143C", "#228B22", "#B8860B", "#A9A9A9"],
                 xaxis: { zoomRange: [0.1, 1000000], panRange: [-1000000, 1000000] },
                 yaxis: { zoomRange: [0.1, 0.1], panRange: [-1000000, 1000000], ticks: ticks },
+                selection: { mode: "x"},
                 zoom: { interactive: true },
                 pan: { interactive: true },
                 grid: {
@@ -122,11 +126,33 @@
                 }
             };
      
+                     
             plots.push($.plot(placeholder, [d1, d2, d3], options));
             plots.push($.plot(placeholder2, [d4, d5, d6, d7, d8, d9], options2));
-    
-            placeholders.bind("plotpan plotzoom", function (event, plot) {
-                var axes = plot.getAxes();
+            placeholders.bind("plotselected", function (event, ranges) {
+                                        
+                   plot = $.plot(placeholder, [d1, d2, d3], $.extend(true, {}, options, {
+                          xaxis: {
+                                  min: ranges.xaxis.from,
+                                  max: ranges.xaxis.to
+                                  }
+                          
+                    }));
+                    plot = $.plot(placeholder2, [d4, d5, d6, d7, d8, d9], $.extend(true, {}, options, {
+                           xaxis: {
+                                   min: ranges.xaxis.from,
+                                   max: ranges.xaxis.to
+                                   },
+                           yaxis:{ticks: ticks }
+                    }));
+             placeholders.bind("plotselected", function (event, ranges) {
+                    plots[1].setSelection(ranges);
+                                                          
+              });
+            });
+           placeholders.bind("plotpan plotzoom", function (event, plot) {
+            
+              var axes = plot.getAxes();
                 for (var i=0; i< plots.length; i++) {
                     if (plot == plots[i])
                         continue;
