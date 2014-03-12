@@ -43,27 +43,27 @@
               d2.push([timeInSeconds[t],y[t]]);
               d3.push([timeInSeconds[t],z[t]]);
               if (activity[t]=="Lying")
-                d4.push([timeInSeconds[t], -2]);
+                d4.push([timeInSeconds[t], -1.9]);
               else
                 d4.push(null);
               if (activity[t]=="Wheeling")
-                d5.push([timeInSeconds[t], -1]);
+                d5.push([timeInSeconds[t], -1.2]);
               else
                 d5.push(null);
               if (activity[t]=="Walking")
-                d6.push([timeInSeconds[t], 0]);
+                d6.push([timeInSeconds[t], -0.4]);
               else
                 d6.push(null);
               if (activity[t]=="Sitting")
-                d7.push([timeInSeconds[t], 1]);
+                d7.push([timeInSeconds[t], 0.4]);
               else
                 d7.push(null);
               if (activity[t]=="Standing")
-                d8.push([timeInSeconds[t], 2]);
+                d8.push([timeInSeconds[t], 1.2]);
               else
                 d8.push(null);
               if (activity[t]=="Misc")
-                d9.push([timeInSeconds[t], 3]);
+                d9.push([timeInSeconds[t], 1.9]);
               else
                 d9.push(null);
             }
@@ -77,7 +77,7 @@
                 shadowSize: 0
               },
               xaxis: { zoomRange: [0.1, 1000000], panRange: [-1000000, 1000000] },
-              yaxis: { zoomRange: [0.1, 0.1], panRange: [-1000000, 1000000], min: -2, max: 3 },
+              yaxis: { zoomRange: [0.1, 0.1], panRange: [-1000000, 1000000] },
               selection: { mode: "x"},
               zoom: { interactive: true },
               pan: { interactive: true },
@@ -89,12 +89,12 @@
             };
 
             var ticks = [
-                [-2, "Lying"],
-                [-1, "Wheeling"],
-                [0, "Walking"],
-                [1, "Sitting"],
-                [2, "Standing"],
-                [3, "Misc"]
+                [-1.9, "Lying"],
+                [-1.2, "Wheeling"],
+                [-0.4, "Walking"],
+                [0.4, "Sitting"],
+                [1.2, "Standing"],
+                [1.9, "Misc"]
             ];
             
             var options2 = {
