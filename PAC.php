@@ -71,21 +71,13 @@
             var plots = [];
             var placeholders = $(".flot");
     
-/*            var d1 = [];
-            for (var i = 0; i < Math.PI * 2; i += 0.25)
-                d1.push([i, Math.sin(i)]);
-    
-            var d2 = [];
-            for (var i = 0; i < Math.PI * 2; i += 0.25)
-                d2.push([i, Math.cos(i)]); */
-    
             var options = {
               series: {
                 lines: {show: true},
                 shadowSize: 0
               },
-              xaxis: { zoomRange: [0.1, 1000000], panRange: [-1000000, 1000000]},
-              yaxis: { zoomRange: [0.1, 0.1], panRange: [-1000000, 1000000] },
+              xaxis: { zoomRange: [0.1, 1000000], panRange: [-1000000, 1000000] },
+              yaxis: { zoomRange: [0.1, 0.1], panRange: [-1000000, 1000000], min: -2, max: 3 },
               selection: { mode: "x"},
               zoom: { interactive: true },
               pan: { interactive: true },
@@ -192,10 +184,10 @@
     <div id="right">
         <p><img src="luc-logo.png" alt="Loyola logo" align="right"></p><br><br><br><br>
 
-        Activity
+        <div id="title">Activity</div>
         <div id="placeholder" class="flot"></div><br>
 
-        Activity Type
+        <div id="title">Activity Type</div>
         <div id="placeholder2" class="flot"></div>
     </div>
 

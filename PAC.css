@@ -55,13 +55,19 @@ body
     font-weight: 400;
 }
 
+#title
+{
+    margin-left: 35px;
+}
+
 /**********************************
     Graphs
 ***********************************/
 #placeholder
 {
-     width: 900px;
+     width: 865px;
      height: 300px;
+     margin-left: 33px;
 }
 
 #placeholder .button
