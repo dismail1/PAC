@@ -16459,21 +16459,6 @@
 {"TimeInSeconds":2619.534,"X":-1.023,"Y":0.073,"Z":0.032,"Date":" 7/15/2013","Time":" 13:43:39.534","Activity":"Standing","WhereIsDevice":"Waist"},
 {"TimeInSeconds":2619.567,"X":-0.962,"Y":0.076,"Z":0.094,"Date":" 7/15/2013","Time":" 13:43:39.567","Activity":"Standing","WhereIsDevice":"Waist"},
 {"TimeInSeconds":2619.6,"X":-0.965,"Y":0,"Z":0.109,"Date":" 7/15/2013","Time":" 13:43:39.600","Activity":"Standing","WhereIsDevice":"Waist"},
-{"TimeInSeconds":2619.634,"X":-1.003,"Y":0.059,"Z":0.161,"Date":" 7/15/2013","Time":" 13:43:39.634","Activity":"Standing","WhereIsDevice":"Waist"},
-{"TimeInSeconds":2639.5,"X":-0.355,"Y":0.534,"Z":-0.757,"Date":" 7/15/2013","Time":" 13:42:59.500","Activity":"Lying","WhereIsDevice":"Waist"},
-{"TimeInSeconds":2639.534,"X":-0.346,"Y":0.528,"Z":-0.745,"Date":" 7/15/2013","Time":" 13:42:59.534","Activity":"Lying","WhereIsDevice":"Waist"},
-{"TimeInSeconds":2639.567,"X":-0.346,"Y":0.528,"Z":-0.754,"Date":" 7/15/2013","Time":" 13:42:59.567","Activity":"Lying","WhereIsDevice":"Waist"},
-{"TimeInSeconds":2639.6,"X":-0.346,"Y":0.54,"Z":-0.748,"Date":" 7/15/2013","Time":" 13:42:59.600","Activity":"Lying","WhereIsDevice":"Waist"},
-{"TimeInSeconds":2639.634,"X":-0.346,"Y":0.54,"Z":-0.754,"Date":" 7/15/2013","Time":" 13:42:59.634","Activity":"Lying","WhereIsDevice":"Waist"},
-{"TimeInSeconds":2639.667,"X":-0.343,"Y":0.54,"Z":-0.76,"Date":" 7/15/2013","Time":" 13:42:59.667","Activity":"Lying","WhereIsDevice":"Waist"},
-{"TimeInSeconds":2639.7,"X":-0.343,"Y":0.54,"Z":-0.76,"Date":" 7/15/2013","Time":" 13:42:59.700","Activity":"Lying","WhereIsDevice":"Waist"},
-{"TimeInSeconds":2639.734,"X":-0.331,"Y":0.543,"Z":-0.748,"Date":" 7/15/2013","Time":" 13:42:59.734","Activity":"Lying","WhereIsDevice":"Waist"},
-{"TimeInSeconds":2639.767,"X":-0.331,"Y":0.548,"Z":-0.742,"Date":" 7/15/2013","Time":" 13:42:59.767","Activity":"Lying","WhereIsDevice":"Waist"},
-{"TimeInSeconds":2639.8,"X":-0.331,"Y":0.543,"Z":-0.748,"Date":" 7/15/2013","Time":" 13:42:59.800","Activity":"Lying","WhereIsDevice":"Waist"},
-{"TimeInSeconds":2639.834,"X":-0.331,"Y":0.548,"Z":-0.757,"Date":" 7/15/2013","Time":" 13:42:59.834","Activity":"Lying","WhereIsDevice":"Waist"},
-{"TimeInSeconds":2639.867,"X":-0.326,"Y":0.551,"Z":-0.745,"Date":" 7/15/2013","Time":" 13:42:59.867","Activity":"Lying","WhereIsDevice":"Waist"},
-{"TimeInSeconds":2639.9,"X":-0.317,"Y":0.548,"Z":-0.742,"Date":" 7/15/2013","Time":" 13:42:59.900","Activity":"Lying","WhereIsDevice":"Waist"},
-{"TimeInSeconds":2639.934,"X":-0.326,"Y":0.543,"Z":-0.742,"Date":" 7/15/2013","Time":" 13:42:59.934","Activity":"Lying","WhereIsDevice":"Waist"},
-{"TimeInSeconds":2639.967,"X":-0.328,"Y":0.548,"Z":-0.748,"Date":" 7/15/2013","Time":" 13:42:59.967","Activity":"Lying","WhereIsDevice":"Waist"}
+{"TimeInSeconds":2619.634,"X":-1.003,"Y":0.059,"Z":0.161,"Date":" 7/15/2013","Time":" 13:43:39.634","Activity":"Standing","WhereIsDevice":"Waist"}
     ]
 }
