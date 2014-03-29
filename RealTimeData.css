@@ -1,0 +1,139 @@
+/**********************************
+    Specialty fonts
+***********************************/
+@font-face
+{
+	font-family: 'ABeeZee';
+	src: url('ABeeZee-Regular.otf');
+	src: local('ABeeZee'),  url('ABeeZee-Regular.otf') format('otf'),  url('ABeeZee-Regular.otf') format('opentype'),
+         	url('ABeeZee.svg#ABeeZee') format('svg');
+}
+
+/**********************************
+    Main body
+***********************************/
+body
+{
+	background-color: #FFFFCC;
+	font-family: "ABeeZee", "Arial";
+	font-size: 18px;
+	font-weight: normal;
+}
+
+#left
+{
+    position: absolute; 
+    top: 0; 
+    width: 30%;
+    height: 100%;
+}
+
+#right
+{
+    position: absolute; 
+    top: 0; 
+    right: 10px; 
+    width: 70%;
+    height: 100%;
+}
+
+#LoyolaPACLab
+{
+    font-size: 24px;
+    font-weight: 700;
+}
+
+#patient
+{
+    font-size: 18px;
+    font-weight: 400;
+}
+
+#display1
+{
+    font-size: 18px;
+    font-weight: 400;
+}
+
+/**********************************
+    Graphs
+***********************************/
+#placeholder1
+{
+     width: 900px;
+     height: 150px;
+}
+
+#placeholder1 .button
+{
+    position: absolute;
+    cursor: pointer;
+}
+
+#placeholder1 div.button
+{
+    font-size: smaller;
+    color: #999;
+    background-color: #eee;
+    padding: 2px;
+}
+
+#placeholder2
+{
+     width: 900px;
+     height: 300px;
+}
+
+#placeholder2 .button
+{
+    position: absolute;
+    cursor: pointer;
+}
+
+#placeholder2 div.button
+{
+    font-size: smaller;
+    color: #999;
+    background-color: #eee;
+    padding: 2px;
+}
+
+#placeholder3
+{
+     width: 900px;
+     height: 300px;
+}
+
+#placeholder3 .button
+{
+    position: absolute;
+    cursor: pointer;
+}
+
+#placeholder3 div.button
+{
+    font-size: smaller;
+    color: #999;
+    background-color: #eee;
+    padding: 2px;
+}
+
+#placeholder4
+{
+     width: 900px;
+     height: 300px;
+}
+
+#placeholder4 .button
+{
+    position: absolute;
+    cursor: pointer;
+}
+
+#placeholder4 div.button
+{
+    font-size: smaller;
+    color: #999;
+    background-color: #eee;
+    padding: 2px;
+}
