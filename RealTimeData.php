@@ -46,7 +46,24 @@
                 shadowSize: 0
             },
             colors: ["#FFD700", "#87CEEB", "#DC143C", "#228B22", "#B8860B", "#A9A9A9"],
-            xaxis: { zoomRange: [0.1, 1000000], panRange: [-1000000, 1000000] },
+            xaxis: {
+                font: { size: 8 },
+                mode: "time",
+                tickSize: [10, "second"],
+                tickFormatter: function (v, axis) {
+                    var date = new Date(v);
+                    if (date.getSeconds() % 10 == 0) {
+                        var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+                        var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+                        var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+                        return hours + ":" + minutes + ":" + seconds;
+                    } else {
+                        return "";
+                    }
+                },
+                zoomRange: [0.1, 1000000],
+                panRange: [-1000000, 1000000]
+            },
             yaxis: { zoomRange: [0.1, 0.1], panRange: [-1000000, 1000000], ticks: ticks },
             selection: { mode: "x"},
             zoom: { interactive: true },
@@ -61,10 +78,10 @@
         var options2 = {
             xaxis: {
                 mode: "time",
-                tickSize: [60, "second"],
+                tickSize: [10, "second"],
                 tickFormatter: function (v, axis) {
                     var date = new Date(v);
-                    if (date.getSeconds() % 20 == 0) {
+                    if (date.getSeconds() % 10 == 0) {
                         var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
                         var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
                         var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
@@ -74,14 +91,14 @@
                     }
                 },
                 zoomRange: [0.1, 1000000],
-                panRange: [-10, 10],
+                panRange: [-10, 10]
             },
             yaxes: [
                 {
                     min: -2,
                     max: 2,
                     zoomRange: [0.1, 0.1],
-                    panRange: [-10, 10]
+                    panRange: [-1000000, 1000000]
                 },
                 {
                     max: 5120,
@@ -247,7 +264,7 @@
 
             plots.push($.plot(placeholder1, [activity1, activity2, activity3, activity4, activity5, activity6], options1));
             plots.push($.plot(placeholder2, datasetA, options2));
-            plots.push($.plot(placeholder3, datasetM, options2));	
+            plots.push($.plot(placeholder3, datasetM, options2));   
             plots.push($.plot(placeholder4, datasetG, options2));
 
             placeholders.bind("plotpan plotzoom", function (event, plot) {
