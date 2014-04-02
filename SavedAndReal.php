@@ -40,10 +40,10 @@
         var updateInterval = 1000;
         var lw = 1.2;
 
+        /***********************************/
+        /*** READ AND PLOT EXISTING DATA ***/
+        /***********************************/
         $(function() {
-
-            /*** READ AND PLOT INCOMING DATA ***/
-
             $.getJSON('SampleData.JSON', function(data) {
                 $.each(data.patientData, function(i, f) {
                     timeInSeconds[amtData] = f.TimeInSeconds;
@@ -177,6 +177,9 @@
             setTimeout(getData, updateInterval);
         });
 
+        /***********************************/
+        /*** READ AND PLOT INCOMING DATA ***/
+        /***********************************/
         function getData() {
             $.ajaxSetup({ cache: false });
             $.ajax({
@@ -208,6 +211,15 @@
 
             now += updateInterval;
 
+            xA.push([now, _data.XA]);
+            yA.push([now, _data.YA]);
+            zA.push([now, _data.ZA]);
+            xM.push([now, _data.XM]);
+            yM.push([now, _data.YM]);
+            zM.push([now, _data.ZM]);
+            xG.push([now, _data.XG]);
+            yG.push([now, _data.YG]);
+            zG.push([now, _data.ZG]);
             if (_data.Activity=="Lying")
                 activity1.push([now, -1.9]);
             else
@@ -232,16 +244,6 @@
                 activity6.push([now, 1.9]);
             else
                 activity6.push(null);
-
-            xA.push([now, _data.XA]);
-            yA.push([now, _data.YA]);
-            zA.push([now, _data.ZA]);
-            xM.push([now, _data.XM]);
-            yM.push([now, _data.YM]);
-            zM.push([now, _data.ZM]);
-            xG.push([now, _data.XG]);
-            yG.push([now, _data.YG]);
-            zG.push([now, _data.ZG]);
 
             datasetA = [
                 { label: "X:" + _data.XA , data: xA, lines: { lineWidth: lw }, color: "#00FF00" },
