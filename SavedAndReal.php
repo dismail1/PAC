@@ -9,13 +9,40 @@
     <script language="javascript" type="text/javascript" src="jquery.flot.selection.js"></script>
 
     <script type="text/javascript">
+        var timeInSeconds = [];
+        var xA = [], yA = [], zA = [];
+        var xM = [], yM = [], zM = [];
+        var xG = [], yG = [], zG = [];
+        var XA = [], YA = [], ZA = [];
+        var XM = [], YM = [], ZM = [];
+        var XG = [], YG = [], ZG = [];
+        var activity = [];
+        var activity1 = [];
+        var activity2 = [];
+        var activity3 = [];
+        var activity4 = [];
+        var activity5 = [];
+        var activity6 = [];
+        var options1;
+        var options2;
+        var plots = [];
+        var placeholders = $(".flot");
+        var ticks = [
+            [-1.9, "Lying"],
+            [-1.2, "Wheeling"],
+            [-0.4, "Walking"],
+            [ 0.4, "Sitting"],
+            [ 1.2, "Standing"],
+            [ 1.9, "Misc"]
+        ];
+        var now = new Date().getTime();
+        var amtData = 0;
+        var updateInterval = 1000;
+        var lw = 1.2;
+
         $(function() {
-            var timeInSeconds = [];
-            var xA = [], yA = [], zA = [];
-            var xM = [], yM = [], zM = [];
-            var xG = [], yG = [], zG = [];
-            var activity = [];
-            var amtData = 0;
+
+            /*** READ AND PLOT INCOMING DATA ***/
 
             $.getJSON('SampleData.JSON', function(data) {
                 $.each(data.patientData, function(i, f) {
@@ -32,16 +59,6 @@
                     activity[amtData] = f.Activity;
                     amtData++;
                 });
-
-                var XA = [], YA = [], ZA = [];
-                var XM = [], YM = [], ZM = [];
-                var XG = [], YG = [], ZG = [];
-                var activity1 = [];
-                var activity2 = [];
-                var activity3 = [];
-                var activity4 = [];
-                var activity5 = [];
-                var activity6 = [];
 
                 for (var t = 0; t < amtData; t++) {
                     XA.push([timeInSeconds[t], xA[t]]);
@@ -79,18 +96,7 @@
                         activity6.push(null);
                 }
 
-                var plots = [];
-                var placeholders = $(".flot");
-                var ticks = [
-                    [-1.9, "Lying"],
-                    [-1.2, "Wheeling"],
-                    [-0.4, "Walking"],
-                    [ 0.4, "Sitting"],
-                    [ 1.2, "Standing"],
-                    [ 1.9, "Misc"]
-                ];
-
-                var options1 = {
+                options1 = {
                     series: {
                         lines: {
                             show: true,
@@ -111,7 +117,7 @@
                     }
                 };
 
-                var options2 = {
+                options2 = {
                     series: {
                         lines: { show: true },
                         shadowSize: 0
@@ -168,7 +174,112 @@
                 });
 
             });
+            setTimeout(getData, updateInterval);
         });
+
+        function getData() {
+            $.ajaxSetup({ cache: false });
+            $.ajax({
+                url: "1.json",
+                dataType: 'json',
+                success: update,
+                error: function () {
+                    setTimeout(getData, updateInterval);
+                }
+            });
+        }
+
+        function update(_data) {
+            activity1.shift();
+            activity2.shift();
+            activity3.shift();
+            activity4.shift();
+            activity5.shift();
+            activity6.shift();
+            xA.shift();
+            yA.shift();
+            zA.shift();
+            xM.shift();
+            yM.shift();
+            zM.shift();
+            xG.shift();
+            yG.shift();
+            zG.shift();
+
+            now += updateInterval;
+
+            if (_data.Activity=="Lying")
+                activity1.push([now, -1.9]);
+            else
+                activity1.push(null);
+            if (_data.Activity=="Wheeling")
+                activity2.push([now, -1.2]);
+            else
+                activity2.push(null);
+            if (_data.Activity=="Walking")
+                activity3.push([now, -0.4]);
+            else
+                activity3.push(null);
+            if (_data.Activity=="Sitting")
+                activity4.push([now, 0.4]);
+            else
+                activity4.push(null);
+            if (_data.Activity=="Standing")
+                activity5.push([now, 1.2]);
+            else
+                activity5.push(null);
+            if (_data.Activity=="Misc")
+                activity6.push([now, 1.9]);
+            else
+                activity6.push(null);
+
+            xA.push([now, _data.XA]);
+            yA.push([now, _data.YA]);
+            zA.push([now, _data.ZA]);
+            xM.push([now, _data.XM]);
+            yM.push([now, _data.YM]);
+            zM.push([now, _data.ZM]);
+            xG.push([now, _data.XG]);
+            yG.push([now, _data.YG]);
+            zG.push([now, _data.ZG]);
+
+            datasetA = [
+                { label: "X:" + _data.XA , data: xA, lines: { lineWidth: lw }, color: "#00FF00" },
+                { label: "Y:" + _data.YA , data: yA, lines: { lineWidth: lw }, color: "#FF0000" },
+                { label: "Z:" + _data.ZA , data: zA, lines: { lineWidth: lw }, color: "#0000FF" }
+            ];
+
+            datasetM = [
+                { label: "X:" + _data.XM , data: xM, lines: { lineWidth: lw }, color: "#00FF00" },
+                { label: "Y:" + _data.YM , data: yM, lines: { lineWidth: lw }, color: "#FF0000" },
+                { label: "Z:" + _data.ZM , data: zM, lines: { lineWidth: lw }, color: "#0000FF" }
+            ];
+
+            datasetG = [
+                { label: "X:" + _data.XG , data: xG, lines: { lineWidth: lw }, color: "#00FF00" },
+                { label: "Y:" + _data.YG , data: yG, lines: { lineWidth: lw }, color: "#FF0000" },
+                { label: "Z:" + _data.ZG , data: zG, lines: { lineWidth: lw }, color: "#0000FF" }
+            ];
+
+            plots.push($.plot(placeholder1, [activity1, activity2, activity3, activity4, activity5, activity6], options1));
+            plots.push($.plot(placeholder2, datasetA, options2));
+            plots.push($.plot(placeholder3, datasetM, options2));
+            plots.push($.plot(placeholder4, datasetG, options2));
+
+            placeholders.bind("plotpan plotzoom", function (event, plot) {
+                var axes = plot.getAxes();
+                for (var i=0; i< plots.length; i++) {
+                    plots[i].getOptions().xaxes[0].min = axes.xaxis.min;
+                    plots[i].getOptions().xaxes[0].max = axes.xaxis.max;
+                    plots[i].getOptions().yaxes[0].min = axes.yaxis.min;
+                    plots[i].getOptions().yaxes[0].max = axes.yaxis.max;
+                    plots[i].setupGrid();
+                    plots[i].draw();
+                }
+            });
+        
+            setTimeout(getData, updateInterval);
+        }
     </script>
 </head>
 
