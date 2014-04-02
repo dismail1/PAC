@@ -1,0 +1,80 @@
+/**********************************
+    Specialty fonts
+***********************************/
+@font-face
+{
+	font-family: 'ABeeZee';
+	src: url('ABeeZee-Regular.otf');
+	src: local('ABeeZee'),  url('ABeeZee-Regular.otf') format('otf'),  url('ABeeZee-Regular.otf') format('opentype'),
+         	url('ABeeZee.svg#ABeeZee') format('svg');
+}
+
+/**********************************
+    Main body
+***********************************/
+body
+{
+	background-color: #FFFFCC;
+	font-family: "ABeeZee", "Arial";
+	font-size: 18px;
+	font-weight: normal;
+}
+
+#left
+{
+    position: absolute; 
+    top: 0; 
+    width: 30%;
+    height: 100%;
+}
+
+#right
+{
+    position: absolute; 
+    top: 0; 
+    right: 10px; 
+    width: 70%;
+    height: 100%;
+}
+
+#LoyolaPACLab
+{
+    font-size: 24px;
+    font-weight: 700;
+}
+
+#patient
+{
+    font-size: 18px;
+    font-weight: 400;
+}
+
+/**********************************
+    Graphs
+***********************************/
+#placeholder1
+{
+     width: 900px;
+     height: 150px;
+}
+
+#placeholder2
+{
+     width: 865px;
+     height: 300px;
+     margin-left: 33px;
+}
+
+#placeholder3
+{
+     width: 865px;
+     height: 300px;
+     margin-left: 33px;
+}
+
+#placeholder4
+{
+     width: 865px;
+     height: 300px;
+     margin-left: 33px;
+}
