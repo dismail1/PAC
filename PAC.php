@@ -117,44 +117,41 @@
                     }
                 }
             };
-     
                      
             plots.push($.plot(placeholder, [d1, d2, d3], options));
             plots.push($.plot(placeholder2, [d4, d5, d6, d7, d8, d9], options2));
+
             placeholders.bind("plotselected", function (event, ranges) {
-                                        
-                   plot = $.plot(placeholder, [d1, d2, d3], $.extend(true, {}, options, {
-                          xaxis: {
-                                  min: ranges.xaxis.from,
-                                  max: ranges.xaxis.to
-                                  }
-                          
-                    }));
-                    plot = $.plot(placeholder2, [d4, d5, d6, d7, d8, d9], $.extend(true, {}, options, {
-                           xaxis: {
-                                   min: ranges.xaxis.from,
-                                   max: ranges.xaxis.to
-                                   },
-                           yaxis:{ticks: ticks }
-                    }));
-             placeholders.bind("plotselected", function (event, ranges) {
-                    plots[1].setSelection(ranges);
-                                                          
+              plot = $.plot(placeholder, [d1, d2, d3], $.extend(true, {}, options, {
+                xaxis: {
+                  min: ranges.xaxis.from,
+                  max: ranges.xaxis.to
+                }
+              }));
+              plot = $.plot(placeholder2, [d4, d5, d6, d7, d8, d9], $.extend(true, {}, options, {
+                xaxis: {
+                  min: ranges.xaxis.from,
+                  max: ranges.xaxis.to
+                },
+                yaxis: { ticks: ticks }
+              }));
+              placeholders.bind("plotselected", function (event, ranges) {
+                plots[1].setSelection(ranges);
               });
             });
-           placeholders.bind("plotpan plotzoom", function (event, plot) {
-            
+
+            placeholders.bind("plotpan plotzoom", function (event, plot) {
               var axes = plot.getAxes();
-                for (var i=0; i< plots.length; i++) {
-                    if (plot == plots[i])
-                        continue;
-                    plots[i].getOptions().xaxes[0].min = axes.xaxis.min;
-                    plots[i].getOptions().xaxes[0].max = axes.xaxis.max;
-                    plots[i].getOptions().yaxes[0].min = axes.yaxis.min;
-                    plots[i].getOptions().yaxes[0].max = axes.yaxis.max;
-                    plots[i].setupGrid();
-                    plots[i].draw();
-                }
+              for (var i=0; i< plots.length; i++) {
+                if (plot == plots[i])
+                  continue;
+                plots[i].getOptions().xaxes[0].min = axes.xaxis.min;
+                plots[i].getOptions().xaxes[0].max = axes.xaxis.max;
+                plots[i].getOptions().yaxes[0].min = axes.yaxis.min;
+                plots[i].getOptions().yaxes[0].max = axes.yaxis.max;
+                plots[i].setupGrid();
+                plots[i].draw();
+              }
             });
           });
         });

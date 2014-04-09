@@ -140,7 +140,7 @@
         function getData() {
             $.ajaxSetup({ cache: false });
             $.ajax({
-                url: "1.json",
+                url: "SampleData.json",
                 dataType: 'json',
                 success: update,
                 error: function () {
@@ -267,7 +267,7 @@
             plots.push($.plot(placeholder3, datasetM, options2));   
             plots.push($.plot(placeholder4, datasetG, options2));
 
-            placeholders.bind("plotpan plotzoom", function (event, plot) {
+/*            placeholders.bind("plotpan plotzoom", function (event, plot) {
                 var axes = plot.getAxes();
                 for (var i=0; i< plots.length; i++) {
                     if (plot == plots[i])
@@ -279,9 +279,9 @@
                     plots[i].setupGrid();
                     plots[i].draw();
                 }
-            });
+            }); */
 
-            setTimeout(getData, updateInterval);
+            setTimeout(getData, updateInterval);  // Every updateInterval milliseconds, run the getData function
         });
     </script>
 </head>
