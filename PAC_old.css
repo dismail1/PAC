@@ -58,20 +58,20 @@ body
 /**********************************
     Graphs
 ***********************************/
-#placeholder1
+#placeholder
 {
      width: 865px;
-     height: 150px;
+     height: 300px;
      margin-left: 33px;
 }
 
-#placeholder1 .button
+#placeholder .button
 {
     position: absolute;
     cursor: pointer;
 }
 
-#placeholder1 div.button
+#placeholder div.button
 {
     font-size: smaller;
     color: #999;
@@ -82,7 +82,7 @@ body
 #placeholder2
 {
      width: 900px;
-     height: 300px;
+     height: 150px;
 }
 
 #placeholder2 .button
