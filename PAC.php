@@ -46,12 +46,12 @@
               XA.push([timeInSeconds[t],xA[t]]);
               YA.push([timeInSeconds[t],yA[t]]);
               ZA.push([timeInSeconds[t],zA[t]]);
-              XM.push([timeInSeconds[t],xA[t]]);
-              YM.push([timeInSeconds[t],yA[t]]);
-              ZM.push([timeInSeconds[t],zA[t]]);
-              XG.push([timeInSeconds[t],xA[t]]);
-              YG.push([timeInSeconds[t],yA[t]]);
-              ZG.push([timeInSeconds[t],zA[t]]);
+              XM.push([timeInSeconds[t],xM[t]]);
+              YM.push([timeInSeconds[t],yM[t]]);
+              ZM.push([timeInSeconds[t],zM[t]]);
+              XG.push([timeInSeconds[t],xG[t]]);
+              YG.push([timeInSeconds[t],yG[t]]);
+              ZG.push([timeInSeconds[t],zG[t]]);
               if (activity[t]=="Lying")
                 d1.push([timeInSeconds[t], -1.9]);
               else
@@ -78,9 +78,6 @@
                 d6.push(null);
             }
 
-            var plots = [];
-            var placeholders = $(".flot");
-    
             var ticks = [
                 [-1.9, "Lying"],
                 [-1.2, "Wheeling"],
@@ -128,8 +125,12 @@
               }
             };
 
+            var plots = [];
+            var placeholders = $(".flot");
             plots.push($.plot(placeholder1, [d1, d2, d3, d4, d5, d6], options1));
             plots.push($.plot(placeholder2, [XA, YA, ZA], options2));
+            plots.push($.plot(placeholder3, [XM, YM, ZM], options2));
+            plots.push($.plot(placeholder4, [XG, YG, ZG], options2));
 
             placeholders.bind("plotselected", function (event, ranges) {
               plot = $.plot(placeholder1, [d1, d2, d3, d4, d5, d6], $.extend(true, {}, options1, {
@@ -140,6 +141,18 @@
                 yaxis: { ticks: ticks }
               }));
               plot = $.plot(placeholder2, [XA, YA, ZA], $.extend(true, {}, options2, {
+                xaxis: {
+                  min: ranges.xaxis.from,
+                  max: ranges.xaxis.to
+                }
+              }));
+              plot = $.plot(placeholder3, [XM, YM, ZM], $.extend(true, {}, options2, {
+                xaxis: {
+                  min: ranges.xaxis.from,
+                  max: ranges.xaxis.to
+                }
+              }));
+              plot = $.plot(placeholder4, [XG, YG, ZG], $.extend(true, {}, options2, {
                 xaxis: {
                   min: ranges.xaxis.from,
                   max: ranges.xaxis.to
@@ -190,12 +203,14 @@
 
     <div id="right">
         <p><img src="luc-logo.png" alt="Loyola logo" align="right"></p><br><br><br><br>
-
-        <div id="title">Activity</div>
+        <div id="title">Activity</div><br>
         <div id="placeholder1" class="flot"></div><br>
-
-        <div id="title">Activity Type</div>
-        <div id="placeholder2" class="flot"></div>
+        <div id="title">Accelerometer</div><br>
+        <div id="placeholder2" class="flot"></div><br>
+        <div id="title">Magnetometer</div><br>
+        <div id="placeholder3" class="flot"></div><br>
+        <div id="title">Gyroscope</div><br>
+        <div id="placeholder4" class="flot"></div>
     </div>
 
 </body>

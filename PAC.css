@@ -60,41 +60,27 @@ body
 ***********************************/
 #placeholder1
 {
-     width: 865px;
+     width: 900px;
      height: 150px;
-     margin-left: 33px;
-}
-
-#placeholder1 .button
-{
-    position: absolute;
-    cursor: pointer;
-}
-
-#placeholder1 div.button
-{
-    font-size: smaller;
-    color: #999;
-    background-color: #eee;
-    padding: 2px;
 }
 
 #placeholder2
 {
-     width: 900px;
+     width: 865px;
      height: 300px;
+     margin-left: 33px;
 }
 
-#placeholder2 .button
+#placeholder3
 {
-    position: absolute;
-    cursor: pointer;
+     width: 865px;
+     height: 300px;
+     margin-left: 33px;
 }
 
-#placeholder2 div.button
+#placeholder4
 {
-    font-size: smaller;
-    color: #999;
-    background-color: #eee;
-    padding: 2px;
+     width: 865px;
+     height: 300px;
+     margin-left: 33px;
 }
