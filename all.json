@@ -1,0 +1,23 @@
+[{
+"key":
+	{"kind":"PatientData","id":0,"name":"CE:00388b40-b0db-4415-90b7-48208616cc3e"
+	},
+"propertyMap":
+	{"ZA":10.280809319435928,"_owner":"USER:\u003canonymous\u003e","_map_time":
+			{"value":{"value":"{}"}
+		},
+		"YG":-0.10687022900763359,"ZG":-46.0,"YA":0.0,"XM":0.06545454545454546,"XA":-384.0,"YM":-0.21727272727272728,"XG":-0.10687022900763359,"_createdAt":"Apr 15, 2014 12:55:08 AM","ZM":-149.0,"_kindName":"PatientData","_updatedAt":"Apr 15, 2014 12:55:08 AM"
+	}
+},
+{
+"key":
+	{"kind":"PatientData","id":0,"name":"CE:0092b2a0-3cf3-4ed1-9989-b493dccd43dd"
+	},
+"propertyMap":
+	{"ZA":-16896.0,"_owner":"USER:\u003canonymous\u003e","_map_time":
+			{"value":{"value":"{}"}
+		},
+		"YG":-205.0,"ZG":-12.0,"YA":0.0,"XM":83.0,"XA":-384.0,"YM":222.0,"XG":-205.0,"_createdAt":"Apr 15, 2014 12:54:24 AM","ZM":-159.0,"_kindName":"PatientData","_updatedAt":"Apr 15, 2014 12:54:24 AM"
+	}	
+}
+]
