@@ -125,7 +125,7 @@
         };
  
         function initData() {
-            $.getJSON('https://cloudbackend-dot-handy-reference-545.appspot.com/api/patient/all.json', function(data) {
+            $.getJSON('all1.json', function(data) {
                 $.each(data, function(i, f) {
                    var createdAt=f.propertyMap._createdAt;
                    var dat = createdAt.split(" ");
@@ -163,10 +163,8 @@
                    var d = new Date (year,month,day,time[0],time[1],time[2]);
                    /*var seconds = time[3].split(":");
                    var second = parseInt(seconds[2], 10) + (parseInt(seconds[1], 10) * 60)+ (parseInt(seconds[0], 10) * 60*60);*/
-                   for(var k=0; k<amtData; k++){ 
-                   	   if (timeInSeconds[amtData]==d.getTime())
-                   	   	   Break;
-                   	   else{
+                   
+                   	   
                    timeInSeconds[amtData] = d.getTime();
                     xA[amtData] = f.propertyMap.XA;
                     yA[amtData] = f.propertyMap.YA;
@@ -182,8 +180,8 @@
               
                     //activity[amtData] = f.Activity;
                     amtData++;
-                   }
-                   }
+                  
+                  
                 });
 
                 for (var t = 0; t <= amtData; t++) {
@@ -267,7 +265,7 @@
         function getData() {
             $.ajaxSetup({ cache: false });
             $.ajax({
-                url: "https://cloudbackend-dot-handy-reference-545.appspot.com/api/patient/all.json",
+                url: "all1.json",
                 dataType: 'json',
                 success: update,
                 error: function () {
