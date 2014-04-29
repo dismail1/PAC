@@ -31,10 +31,12 @@
         var placeholders = $(".flot");
         var datasetA, datasetM, datasetG;
         var totalPoints = 100;
-        var updateInterval = 1000;
+        var updateInterval = 5000;
         var now = new Date().getTime();
         var lw = 1.2;
         var count=0;
+        var url ='https://cloudbackend-dot-handy-reference-545.appspot.com/api/patient/all.json';
+        var url2='https://cloudbackend-dot-handy-reference-545.appspot.com/api/patient/last-second.json';
         var ticks = [
             [-1.9, "Lying"],
             [-1.2, "Wheeling"],
@@ -43,6 +45,7 @@
             [1.2, "Standing"],
             [1.9, "Misc"]
         ];
+        
             
         var options1 = {
             series: {
@@ -125,60 +128,50 @@
         };
  
         function initData() {
-            $.getJSON('all1.json', function(data) {
+            $.getJSON(url, function(data) {
                 $.each(data, function(i, f) {
-                   var createdAt=f.propertyMap._createdAt;
-                   var dat = createdAt.split(" ");
-                   var month = dat[0];
-                   if (month == "Jan")
-                   	   month = 1;
-                   else if (month =="Feb")
-                   	   month = 2;
-                   else if (month =="Mar")
-                   	   month = 3;
-                   else if (month =="Apr")
-                   	   month = 4;
-                   else if (month =="May")
-                   	   month = 5;
-                   else if (month =="Jun")
-                   	   month = 6;
-                   else if (month =="Jul")
-                   	   month = 7;
-                   else if (month =="Aug")
-                   	   month = 8;
-                   else if (month =="Sep")
-                   	   month = 9;
-                   else if (month =="Oct")
-                   	   month = 10;
-                   else if (month =="Nov")
-                   	   month = 11;
-                   else if (month =="Dec")
-                   	   month = 12;
-                   var day = dat[1].substr(0,1);
-                   var year = dat[2];
-                   var time = dat[3].split(":");
-                   var timeZone = dat[4];
-                   if (timeZone == "PM")
-                   	   time[0]+=12; 
-                   var d = new Date (year,month,day,time[0],time[1],time[2]);
-                   /*var seconds = time[3].split(":");
-                   var second = parseInt(seconds[2], 10) + (parseInt(seconds[1], 10) * 60)+ (parseInt(seconds[0], 10) * 60*60);*/
-                   
-                   	   
-                   timeInSeconds[amtData] = d.getTime();
-                    xA[amtData] = f.propertyMap.XA;
-                    yA[amtData] = f.propertyMap.YA;
-                    zA[amtData] = f.propertyMap.ZA;
-                    xM[amtData] = f.propertyMap.XM;
-                    yM[amtData] = f.propertyMap.YM;
-                    zM[amtData] = f.propertyMap.ZM;
-                    xG[amtData] = f.propertyMap.XG;
-                    yG[amtData] = f.propertyMap.YG;
-                    zG[amtData] = f.propertyMap.ZG;
-                    document.getElementById("p").innerHTML
-                        ="time: "+timeInSeconds[amtData]+"<br>";
-              
-                    //activity[amtData] = f.Activity;
+                   //https://cloudbackend-dot-handy-reference-545.appspot.com/api/patient/all.json?callback=?
+                    if (f.propertyMap.XA ==='undefined')
+                    	    timeInSeconds[amtData] =null;
+                    else
+                    	    timeInSeconds[amtData] =f.propertyMap.seconds ;
+                    if (f.propertyMap.XA ==='undefined')
+                    	    xA[amtData] = null;
+                    else
+                    	xA[amtData] = f.propertyMap.XA;
+                    if (f.propertyMap.YA ==='undefined')
+                    	yA[amtData] = null
+                    else
+                    	yA[amtData] = f.propertyMap.YA;
+                    if (f.propertyMap.ZA ==='undefined')
+                    	    zA[amtData] = null;
+                    else
+                    	zA[amtData] = f.propertyMap.ZA;
+                    if (f.propertyMap.XM ==='undefined')
+                    	    xM[amtData] =null;
+                    else
+                    	xM[amtData] = f.propertyMap.XM;
+                    if (f.propertyMap.YM ==='undefined')
+                    	    yM[amtData] = null;
+                    else
+                    	yM[amtData] = f.propertyMap.YM;
+                    if (f.propertyMap.ZM ==='undefined')
+                    	    zM[amtData] =null;
+                    else
+                    	zM[amtData] = f.propertyMap.ZM;
+                    if (f.propertyMap.XG ==='undefined')
+                    	    xG[amtData]  = null;
+                    else
+                    	xG[amtData] = f.propertyMap.XG;
+                    if (f.propertyMap.YG ==='undefined')
+                    	    yG[amtData] =null;
+                    else
+                    	yG[amtData] = f.propertyMap.YG;
+                    if (f.propertyMap.ZG ==='undefined')
+                    	    zG[amtData] = null;
+                    else
+                    	zG[amtData] = f.propertyMap.ZG;
+                    activity[amtData] = f.propertyMap.Activity;
                     amtData++;
                   
                   
@@ -194,7 +187,7 @@
                   XG.push([timeInSeconds[t],xG[t]]);
                   YG.push([timeInSeconds[t],yG[t]]);
                   ZG.push([timeInSeconds[t],zG[t]]);
-                 /* if (activity[t]=="Lying")
+                  if (activity[t]=="Lying")
                     activity1.push([timeInSeconds[t], -1.9]);
                   else
                     activity1.push(null);
@@ -217,29 +210,29 @@
                   if (activity[t]=="Misc")
                     activity6.push([timeInSeconds[t], 1.9]);
                   else
-                    activity6.push(null);*/
+                    activity6.push(null);
                 }
                 
                 
                     
                 datasetA = [        
-        { label: "X:"+ xA[amtData-1] , data: XA, lines:{ lineWidth:lw}},
-        { label: "Y:"+ yA[amtData-1] , data: YA, lines: { lineWidth:lw}},
-        { label: "Z:"+ zA[amtData-1] , data: ZA, lines: { lineWidth:lw}}
+        { label: "X:"+ xA[0] , data: XA, lines:{ lineWidth:lw}},
+        { label: "Y:"+ yA[0] , data: YA, lines: { lineWidth:lw}},
+        { label: "Z:"+ zA[0] , data: ZA, lines: { lineWidth:lw}}
     ];
     
     datasetM = [        
-        { label: "X:"+ xM[amtData-1], data: XM, lines:{ lineWidth:lw}},
-        { label: "Y:"+ yM[amtData-1], data: YM, lines: { lineWidth:lw}},
-        { label: "Z:"+ zM[amtData-1], data: ZM, lines: { lineWidth:lw}}
+        { label: "X:"+ xM[0], data: XM, lines:{ lineWidth:lw}},
+        { label: "Y:"+ yM[0], data: YM, lines: { lineWidth:lw}},
+        { label: "Z:"+ zM[0], data: ZM, lines: { lineWidth:lw}}
     ];
     
     datasetG = [        
-        { label: "X:"+ xG[amtData-1], data: XG, lines:{ lineWidth:lw}},
-        { label: "Y:"+ yG[amtData-1], data: YG, lines: { lineWidth:lw}},
-        { label: "Z:"+ zG[amtData-1], data: ZG, lines: { lineWidth:lw}}
+        { label: "X:"+ xG[0], data: XG, lines:{ lineWidth:lw}},
+        { label: "Y:"+ yG[0], data: YG, lines: { lineWidth:lw}},
+        { label: "Z:"+ zG[0], data: ZG, lines: { lineWidth:lw}}
     ];
-           // plots.push($.plot(placeholder1, [activity1, activity2, activity3, activity4, activity5, activity6], options1));
+            plots.push($.plot(placeholder1, [activity1, activity2, activity3, activity4, activity5, activity6], options1));
             plots.push($.plot(placeholder2, datasetA, options2));
             plots.push($.plot(placeholder3, datasetM, options2));
             plots.push($.plot(placeholder4, datasetG, options2));
@@ -259,13 +252,14 @@
               }
             });
           });
+           
  setTimeout(getData, updateInterval);
         }
 
         function getData() {
             $.ajaxSetup({ cache: false });
             $.ajax({
-                url: "all1.json",
+                url: url,
                 dataType: 'json',
                 success: update,
                 error: function () {
@@ -275,7 +269,100 @@
         }
 
         function update(_data) {
-        	
+    
+   
+
+    now += updateInterval
+
+    if (_data[0].propertyMap.Activity=="Lying")
+                    activity1.push([now, -1.9]);
+                  else
+                    activity1.push(null);
+                  if (_data[0].propertyMap.Activity=="Wheeling")
+                    activity2.push([now, -1.2]);
+                  else
+                    activity2.push(null);
+                  if (_data[0].propertyMap.Activity=="Walking")
+                    activity3.push([now, -0.4]);
+                  else
+                    activity3.push(null);
+                  if (_data[0].propertyMap.Activity=="Sitting")
+                    activity4.push([now, 0.4]);
+                  else
+                    activity4.push(null);
+                  if (_data[0].propertyMap.Activity=="Standing")
+                    activity5.push([now, 1.2]);
+                  else
+                    activity5.push(null);
+                  if (_data[0].propertyMap.Activity=="Misc")
+                    activity6.push([now, 1.9]);
+                  else
+                    activity6.push(null);
+                    
+       
+    temp = [now, _data[0].propertyMap.XA];
+    XA.push(temp);
+
+    temp = [now, _data[0].propertyMap.YA];
+    YA.push(temp);
+
+    temp = [now, _data[0].propertyMap.ZA];
+    ZA.push(temp);
+
+    datasetA = [
+        { label: "X:" + _data[0].propertyMap.XA , data: XA, lines: { lineWidth: lw }},
+        { label: "Y:" + _data[0].propertyMap.YA , data: YA, lines: { lineWidth: lw }},
+        { label: "Z:" + _data[0].propertyMap.ZA , data: ZA, lines: { lineWidth: lw}}        
+    ];
+    
+    temp = [now, _data[0].propertyMap.XM];
+    XM.push(temp);
+
+    temp = [now, _data[0].propertyMap.YM];
+    YM.push(temp);
+
+    temp = [now, _data[0].propertyMap.ZM];
+    ZM.push(temp);
+    
+    datasetM = [
+        { label: "X:" + _data[0].propertyMap.XM , data: XM, lines: { lineWidth: lw }},
+        { label: "Y:" + _data[0].propertyMap.YM , data: YM, lines: { lineWidth: lw }},
+        { label: "Z:" + _data[0].propertyMap.ZM , data: ZM, lines: { lineWidth: lw}}        
+    ];
+    
+      temp = [now, _data[0].propertyMap.XG];
+    XG.push(temp);
+
+    temp = [now, _data[0].propertyMap.YG];
+    YG.push(temp);
+
+    temp = [now, _data[0].propertyMap.ZG];
+    ZG.push(temp);
+    
+    datasetG = [
+        { label: "X:" + _data[0].propertyMap.XG , data: XG, lines: { lineWidth: lw }},
+        { label: "Y:" + _data[0].propertyMap.YG , data: YG, lines: { lineWidth: lw }},
+        { label: "Z:" + _data[0].propertyMap.ZG , data: ZG, lines: { lineWidth: lw}}        
+    ];
+    
+    plots.push($.plot(placeholder1, [activity1, activity2, activity3, activity4, activity5, activity6], options1));
+
+    plots.push($.plot(placeholder2, datasetA, options2));
+    plots.push($.plot(placeholder3, datasetM, options2));
+    plots.push($.plot(placeholder4, datasetG, options2));
+    placeholders.bind("plotpan plotzoom", function (event, plot) {
+        var axes = plot.getAxes();
+        for(var i=0; i< plots.length; i++) {
+            plots[i].getOptions().xaxes[0].min = axes.xaxis.min;
+            plots[i].getOptions().xaxes[0].max = axes.xaxis.max;
+            plots[i].getOptions().yaxes[0].min = axes.yaxis.min;
+            plots[i].getOptions().yaxes[0].max = axes.yaxis.max;
+            plots[i].setupGrid();
+            plots[i].draw();
+        }
+    });
+    setTimeout(getData, updateInterval);
+        /*	
             activity1.shift();
             activity2.shift();
             activity3.shift();
@@ -293,30 +380,22 @@
             zG.shift();
             now += updateInterval;
            
-            if (_data[amtData].propertyMap._createdAt=== 'undefined'){
-                	 
-            }else{
             	    
-            	    var createdAt=f.propertyMap._createdAt;
-                   var time = createdAt.split(" ");
-                   var seconds = time[3].split(":");
-                   var second = parseInt(seconds[2], 10) + (parseInt(seconds[1], 10) * 60)+ (parseInt(seconds[0], 10) * 60*60);
-                    timeInSeconds[amtData] = second;
-                       
-                    
-                    xA[amtData] = _data[amtData].propertyMap.XA;
-                    yA[amtData] = _data[amtData].propertyMap.YA;
-                    zA[amtData] = _data[amtData].propertyMap.ZA;
-                    xM[amtData] = _data[amtData].propertyMap.XM;
-                    yM[amtData] = _data[amtData].propertyMap.YM;
-                    zM[amtData] = _data[amtData].propertyMap.ZM;
-                    xG[amtData] = _data[amtData].propertyMap.XG;
-                    yG[amtData] = _data[amtData].propertyMap.YG;
-                    zG[amtData] = _data[amtData].propertyMap.ZG;
-                    //activity[amtData] = _data.patientData[amtData].Activity;
+            	    
+                    timeInSeconds[0] = _data[0].propertyMap.seconds;
+                    xA[0] = _data[0].propertyMap.XA;
+                    yA[0] = _data[0].propertyMap.YA;
+                    zA[0] = _data[0].propertyMap.ZA;
+                    xM[0] = _data[0].propertyMap.XM;
+                    yM[0] = _data[0].propertyMap.YM;
+                    zM[0] = _data[0].propertyMap.ZM;
+                    xG[0] = _data[0].propertyMap.XG;
+                    yG[0] = _data[0].propertyMap.YG;
+                    zG[0] = _data[0].propertyMap.ZG;
+                    activity[0] = _data[0].propertyMap.Activity;
           
            
-           /* if (_data.Activity=="Lying")
+            if (_data.Activity=="Lying")
                 activity1.push([now, -1.9]);
             else
                 activity1.push(null);
@@ -341,32 +420,32 @@
             else
                 activity6.push(null);
 
-            XA.push([timeInSeconds[amtData], xA[amtData]]);
-            YA.push([timeInSeconds[amtData], yA[amtData]]);
-            ZA.push([timeInSeconds[amtData], zA[amtData]]);
-            XM.push([timeInSeconds[amtData], xM[amtData]]);
-            YM.push([timeInSeconds[amtData], yM[amtData]]);
-            ZM.push([timeInSeconds[amtData], zM[amtData]]);
-            XG.push([timeInSeconds[amtData], xG[amtData]]);
-            YG.push([timeInSeconds[amtData], yG[amtData]]);
-            ZG.push([timeInSeconds[amtData], zG[amtData]]);*/
+            XA.push([timeInSeconds[0], xA[0]]);
+            YA.push([timeInSeconds[0], yA[0]]);
+            ZA.push([timeInSeconds[0], zA[0]]);
+            XM.push([timeInSeconds[0], xM[0]]);
+            YM.push([timeInSeconds[0], yM[0]]);
+            ZM.push([timeInSeconds[0], zM[0]]);
+            XG.push([timeInSeconds[0], xG[0]]);
+            YG.push([timeInSeconds[0], yG[0]]);
+            ZG.push([timeInSeconds[0], zG[0]]);
                 	
             datasetA = [
-                { label: "X:" + _data.key[amtData].XA , data: XA, lines: { lineWidth: lw }},
-                { label: "Y:" + _data.key[amtData].YA , data: YA, lines: { lineWidth: lw }},
-                { label: "Z:" + _data.key[amtData].ZA , data: ZA, lines: { lineWidth: lw }}
+                { label: "X:" + _data[0].propertyMap.XA , data: XA, lines: { lineWidth: lw }},
+                { label: "Y:" + _data[0].propertyMap.YA , data: YA, lines: { lineWidth: lw }},
+                { label: "Z:" + _data[0].propertyMap.ZA , data: ZA, lines: { lineWidth: lw }}
             ];
 
             datasetM = [
-                { label: "X:" + _data.key[amtData].XM , data: XM, lines: { lineWidth: lw }},
-                { label: "Y:" + _data.key[amtData].YM , data: YM, lines: { lineWidth: lw }},
-                { label: "Z:" + _data.key[amtData].ZM , data: ZM, lines: { lineWidth: lw }}
+                { label: "X:" + _data[0].propertyMap.XM , data: XM, lines: { lineWidth: lw }},
+                { label: "Y:" + _data[0].propertyMap.YM , data: YM, lines: { lineWidth: lw }},
+                { label: "Z:" + _data[0].propertyMap.ZM , data: ZM, lines: { lineWidth: lw }}
             ];
 
             datasetG = [
-                { label: "X:" + _data.key[amtData].XG , data: XG, lines: { lineWidth: lw }},
-                { label: "Y:" + _data.key[amtData].YG , data: YG, lines: { lineWidth: lw }},
-                { label: "Z:" + _data.key[amtData].ZG , data: ZG, lines: { lineWidth: lw }}
+                { label: "X:" + _data[0].propertyMap.XG , data: XG, lines: { lineWidth: lw }},
+                { label: "Y:" + _data[0].propertyMap.YG , data: YG, lines: { lineWidth: lw }},
+                { label: "Z:" + _data[0].propertyMap.ZG , data: ZG, lines: { lineWidth: lw }}
             ];
             
             amtData++;
@@ -389,12 +468,12 @@
             getData();
             //setTimeout(getData, updateInterval);
           
-        }
+        */
         }
 
         $(document).ready(function () {
             initData();
-            setTimeout(getData, updateInterval);  // Every updateInterval milliseconds, run the getData function
+           // setTimeout(getData, updateInterval);  // Every updateInterval milliseconds, run the getData function
         });
     </script>
 </head>
@@ -404,11 +483,11 @@
         <script type="text/javascript">
             // Get patient ID, type and in lab/at home
             $(function() {
-                $.getJSON('all.json', function(data) {
+                $.getJSON(url, function(data) {
                     var obj = data[0];
             
                 	document.getElementById("patient").innerHTML
-                        ="Patient ID: "+obj.key.id+"<br>"+"Patient Name: "+obj.key.name+"<br>";
+                        ="Patient ID: "+obj.key.id+"<br>"+"Patient Name: "+obj.key.name+"<br>"+"Where Is Device: "+obj.propertyMap.WhereIsDevice+"<br>";
                 });
             });
         </script>
@@ -423,8 +502,8 @@
 
     <div id="right">
         <p><img src="luc-logo.png" alt="Loyola logo" align="right"></p><br><br><br><br>
-       <!-- <div id="title">Activity</div><br>
-        <div id="placeholder1" class="flot"></div><br> -->
+        <div id="title">Activity</div><br>
+        <div id="placeholder1" class="flot"></div><br> 
         <div id="title">Accelerometer</div><br>
         <div id="placeholder2" class="flot"></div><br>
         <div id="title">Magnetometer</div><br>

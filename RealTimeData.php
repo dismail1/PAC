@@ -35,9 +35,9 @@ var plots = [];
 var placeholders = $(".flot");
 var dataset;
 var totalPoints = 100;
-var updateInterval = 5000;
+var updateInterval = 500;
 var now = new Date().getTime();
-
+var url='https://cloudbackend-dot-handy-reference-545.appspot.com/api/patient/last-second.json';
 var options = {
     series: {
         lines: {
@@ -167,7 +167,7 @@ function GetData() {
     $.ajaxSetup({ cache: false });
 
     $.ajax({
-        url: "1.json",
+        url: url,
         dataType: 'json',
         success: update,
         error: function () {
@@ -192,75 +192,75 @@ function update(_data) {
 
     now += updateInterval
 
-    if (_data.Activity=="Lying")
+    if (_data.propertyMap.Activity=="Lying")
                     activity1.push([now, -1.9]);
                   else
                     activity1.push(null);
-                  if (_data.Activity=="Wheeling")
+                  if (_data.propertyMap.Activity=="Wheeling")
                     activity2.push([now, -1.2]);
                   else
                     activity2.push(null);
-                  if (_data.Activity=="Walking")
+                  if (_data.propertyMap.Activity=="Walking")
                     activity3.push([now, -0.4]);
                   else
                     activity3.push(null);
-                  if (_data.Activity=="Sitting")
+                  if (_data.propertyMap.Activity=="Sitting")
                     activity4.push([now, 0.4]);
                   else
                     activity4.push(null);
-                  if (_data.Activity=="Standing")
+                  if (_data.propertyMap.Activity=="Standing")
                     activity5.push([now, 1.2]);
                   else
                     activity5.push(null);
-                  if (_data.Activity=="Misc")
+                  if (_data.propertyMap.Activity=="Misc")
                     activity6.push([now, 1.9]);
                   else
                     activity6.push(null);
                     
        
-    temp = [now, _data.XA];
+    temp = [now, _data.propertyMap.XA];
     xA.push(temp);
 
-    temp = [now, _data.YA];
+    temp = [now, _data.propertyMap.YA];
     yA.push(temp);
 
-    temp = [now, _data.ZA];
+    temp = [now, _data.propertyMap.ZA];
     zA.push(temp);
 
     datasetA = [
-        { label: "X:" + _data.XA , data: xA, lines: { lineWidth: lw }},
-        { label: "Y:" + _data.YA , data: yA, lines: { lineWidth: lw }},
-        { label: "Z:" + _data.ZA , data: zA, lines: { lineWidth: lw}}        
+        { label: "X:" + _data.propertyMap.XA , data: xA, lines: { lineWidth: lw }},
+        { label: "Y:" + _data.propertyMap.YA , data: yA, lines: { lineWidth: lw }},
+        { label: "Z:" + _data.propertyMap.ZA , data: zA, lines: { lineWidth: lw}}        
     ];
     
-    temp = [now, _data.XM];
+    temp = [now, _data.propertyMap.XM];
     xM.push(temp);
 
-    temp = [now, _data.YM];
+    temp = [now, _data.propertyMap.YM];
     yM.push(temp);
 
-    temp = [now, _data.ZM];
+    temp = [now, _data.propertyMap.ZM];
     zM.push(temp);
     
     datasetM = [
-        { label: "X:" + _data.XM , data: xM, lines: { lineWidth: lw }},
-        { label: "Y:" + _data.YM , data: yM, lines: { lineWidth: lw }},
-        { label: "Z:" + _data.ZM , data: zM, lines: { lineWidth: lw}}        
+        { label: "X:" + _data.propertyMap.XM , data: xM, lines: { lineWidth: lw }},
+        { label: "Y:" + _data.propertyMap.YM , data: yM, lines: { lineWidth: lw }},
+        { label: "Z:" + _data.propertyMap.ZM , data: zM, lines: { lineWidth: lw}}        
     ];
     
-      temp = [now, _data.XG];
+      temp = [now, _data.propertyMap.XG];
     xG.push(temp);
 
-    temp = [now, _data.YG];
+    temp = [now, _data.propertyMap.YG];
     yG.push(temp);
 
-    temp = [now, _data.ZG];
+    temp = [now, _data.propertyMap.ZG];
     zG.push(temp);
     
     datasetG = [
-        { label: "X:" + _data.XG , data: xG, lines: { lineWidth: lw }},
-        { label: "Y:" + _data.YG , data: yG, lines: { lineWidth: lw }},
-        { label: "Z:" + _data.ZG , data: zG, lines: { lineWidth: lw}}        
+        { label: "X:" + _data.propertyMap.XG , data: xG, lines: { lineWidth: lw }},
+        { label: "Y:" + _data.propertyMap.YG , data: yG, lines: { lineWidth: lw }},
+        { label: "Z:" + _data.propertyMap.ZG , data: zG, lines: { lineWidth: lw}}        
     ];
     
     plots.push($.plot(placeholder1, [activity1, activity2, activity3, activity4, activity5, activity6], options1));
@@ -329,15 +329,16 @@ $(document).ready(function () {
 <body>
 <div id="left">
 <script type="text/javascript">
-// Get patient ID, type and in lab/at home
-$(function() {
-  $.getJSON('PatientInfo.json', function(data) {
-            document.getElementById("patient").innerHTML
-            ="Patient ID: "+data.PatientID+"<br>"+"Patient type: "+data.PatientType+"<br>"
-            +"In lab/at home: "+data.InLabAtHome;
+            // Get patient ID, type and in lab/at home
+            $(function() {
+                $.getJSON(url, function(data) {
+                    var obj = data;
+            
+                	document.getElementById("patient").innerHTML
+                        ="Patient ID: "+obj.key.id+"<br>"+"Patient Name: "+obj.key.name+"<br>"+"Where Is Device: "+obj.propertyMap.WhereIsDevice+"<br>";
+                });
             });
-  });
-</script>
+        </script>
 
 <p id="LoyolaPACLab">Loyola PAC Lab<br>
 <div id="patient"></div></p>

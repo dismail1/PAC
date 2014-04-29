@@ -7,6 +7,7 @@
     <script language="javascript" type="text/javascript" src="jquery.flot.js"></script>
     <script language="javascript" type="text/javascript" src="jquery.flot.navigate.js"></script>
     <script language="javascript" type="text/javascript" src="jquery.flot.selection.js"></script>
+<script language="javascript" type="text/javascript" src="jquery.flot.time.js"></script>    
 
     <script type="text/javascript">
         $(function () {
@@ -96,7 +97,20 @@
                     shadowSize: 0
                 },
                 colors: ["#FFD700", "#87CEEB", "#DC143C", "#228B22", "#B8860B", "#A9A9A9"],
-                xaxis: { zoomRange: [0.1, 1000000], panRange: [-1000000, 1000000] },
+                xaxis: {
+                mode: "time",
+                tickSize: [1, "second"],
+                tickFormatter: function (v, axis) {
+                    var date = new Date(v);
+                    if (date.getSeconds() % 1 == 0) {
+                        var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+                        var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+                        var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+                        return hours + ":" + minutes + ":" + seconds;
+                    } else {
+                        return "";
+                    }
+                }, zoomRange: [0.1, 1000000], panRange: [-1000000, 1000000] },
                 yaxis: { zoomRange: [0.1, 0.1], panRange: [-1000000, 1000000], ticks: ticks },
                 selection: { mode: "x"},
                 zoom: { interactive: true },
@@ -113,7 +127,20 @@
                 lines: {show: true},
                 shadowSize: 0
               },
-              xaxis: { zoomRange: [0.1, 1000000], panRange: [-1000000, 1000000] },
+              xaxis: {
+                mode: "time",
+                tickSize: [1, "second"],
+                tickFormatter: function (v, axis) {
+                    var date = new Date(v);
+                    if (date.getSeconds() % 1 == 0) {
+                        var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+                        var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+                        var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+                        return hours + ":" + minutes + ":" + seconds;
+                    } else {
+                        return "";
+                    }
+                }, zoomRange: [0.1, 1000000], panRange: [-1000000, 1000000] },
               yaxis: { zoomRange: [0.1, 0.1], panRange: [-1000000, 1000000] },
               selection: { mode: "x"},
               zoom: { interactive: true },
